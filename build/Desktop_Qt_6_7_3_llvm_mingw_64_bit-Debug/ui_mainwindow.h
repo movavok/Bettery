@@ -11,9 +11,11 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QLabel>
+#include <QtWidgets/QFrame>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
@@ -24,9 +26,12 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QLabel *label;
     QPushButton *pushButton;
+    QGroupBox *groupBox;
+    QProgressBar *progressBar;
+    QFrame *frame;
     QPushButton *pushButton_2;
+    QPushButton *pushButton_3;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -34,22 +39,34 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(500, 600);
+        MainWindow->resize(600, 500);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        label = new QLabel(centralwidget);
-        label->setObjectName("label");
-        label->setGeometry(QRect(210, 120, 91, 20));
         pushButton = new QPushButton(centralwidget);
         pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(200, 190, 93, 29));
+        pushButton->setGeometry(QRect(250, 400, 93, 29));
+        groupBox = new QGroupBox(centralwidget);
+        groupBox->setObjectName("groupBox");
+        groupBox->setGeometry(QRect(100, 50, 400, 250));
+        progressBar = new QProgressBar(groupBox);
+        progressBar->setObjectName("progressBar");
+        progressBar->setGeometry(QRect(0, 233, 443, 16));
+        progressBar->setValue(24);
+        frame = new QFrame(groupBox);
+        frame->setObjectName("frame");
+        frame->setGeometry(QRect(10, 30, 381, 191));
+        frame->setFrameShape(QFrame::Shape::StyledPanel);
+        frame->setFrameShadow(QFrame::Shadow::Raised);
         pushButton_2 = new QPushButton(centralwidget);
         pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setGeometry(QRect(400, 10, 93, 29));
+        pushButton_2->setGeometry(QRect(20, 180, 41, 29));
+        pushButton_3 = new QPushButton(centralwidget);
+        pushButton_3->setObjectName("pushButton_3");
+        pushButton_3->setGeometry(QRect(540, 180, 41, 29));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 500, 26));
+        menubar->setGeometry(QRect(0, 0, 600, 26));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -63,9 +80,10 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "Welcome", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "Add", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWindow", "Your week", nullptr));
+        groupBox->setTitle(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\275\320\265\320\264\320\265\320\273\321\214\320\275\320\270\320\272", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("MainWindow", "<", nullptr));
+        pushButton_3->setText(QCoreApplication::translate("MainWindow", ">", nullptr));
     } // retranslateUi
 
 };
