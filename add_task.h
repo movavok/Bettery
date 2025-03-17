@@ -15,6 +15,11 @@ public:
     explicit Add_task(QWidget *parent = nullptr);
     ~Add_task();
 
+private slots:
+    void on_b_ready_clicked();
+
+    void on_b_pickMon_clicked();
+
 private:
     Ui::Add_task *ui;
 };

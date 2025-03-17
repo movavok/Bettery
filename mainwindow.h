@@ -2,6 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
+#include <QTime>
+#include <QTimer>
+#include <QDebug>
+
+#include "add_task.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -18,9 +24,12 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_add_button_clicked();
+    void day_progress();
 
 private:
     Ui::MainWindow *ui;
+
+    QTimer *timer; // таймер
 };
 #endif // MAINWINDOW_H

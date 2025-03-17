@@ -23,16 +23,16 @@ class Ui_Add_task
 {
 public:
     QGridLayout *gridLayout_2;
-    QLabel *label;
-    QLineEdit *lineEdit;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton_3;
-    QPushButton *pushButton_7;
-    QPushButton *pushButton_4;
-    QPushButton *pushButton_5;
-    QPushButton *pushButton_6;
-    QPushButton *pushButton_8;
+    QLabel *lb_yourtask;
+    QLineEdit *le_task;
+    QPushButton *b_pickMon;
+    QPushButton *b_pickTue;
+    QPushButton *b_pickWed;
+    QPushButton *b_pickThu;
+    QPushButton *b_pickFri;
+    QPushButton *b_pickSat;
+    QPushButton *b_pickSun;
+    QPushButton *b_ready;
 
     void setupUi(QDialog *Add_task)
     {
@@ -41,63 +41,63 @@ public:
         Add_task->resize(415, 204);
         gridLayout_2 = new QGridLayout(Add_task);
         gridLayout_2->setObjectName("gridLayout_2");
-        label = new QLabel(Add_task);
-        label->setObjectName("label");
+        lb_yourtask = new QLabel(Add_task);
+        lb_yourtask->setObjectName("lb_yourtask");
 
-        gridLayout_2->addWidget(label, 0, 0, 1, 1);
+        gridLayout_2->addWidget(lb_yourtask, 0, 0, 1, 1);
 
-        lineEdit = new QLineEdit(Add_task);
-        lineEdit->setObjectName("lineEdit");
+        le_task = new QLineEdit(Add_task);
+        le_task->setObjectName("le_task");
 
-        gridLayout_2->addWidget(lineEdit, 0, 1, 1, 3);
+        gridLayout_2->addWidget(le_task, 0, 1, 1, 3);
 
-        pushButton = new QPushButton(Add_task);
-        pushButton->setObjectName("pushButton");
-        pushButton->setMinimumSize(QSize(0, 29));
+        b_pickMon = new QPushButton(Add_task);
+        b_pickMon->setObjectName("b_pickMon");
+        b_pickMon->setMinimumSize(QSize(0, 29));
 
-        gridLayout_2->addWidget(pushButton, 1, 0, 1, 1);
+        gridLayout_2->addWidget(b_pickMon, 1, 0, 1, 1);
 
-        pushButton_2 = new QPushButton(Add_task);
-        pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setMinimumSize(QSize(0, 29));
+        b_pickTue = new QPushButton(Add_task);
+        b_pickTue->setObjectName("b_pickTue");
+        b_pickTue->setMinimumSize(QSize(0, 29));
 
-        gridLayout_2->addWidget(pushButton_2, 1, 1, 1, 1);
+        gridLayout_2->addWidget(b_pickTue, 1, 1, 1, 1);
 
-        pushButton_3 = new QPushButton(Add_task);
-        pushButton_3->setObjectName("pushButton_3");
-        pushButton_3->setMinimumSize(QSize(0, 29));
+        b_pickWed = new QPushButton(Add_task);
+        b_pickWed->setObjectName("b_pickWed");
+        b_pickWed->setMinimumSize(QSize(0, 29));
 
-        gridLayout_2->addWidget(pushButton_3, 1, 2, 1, 1);
+        gridLayout_2->addWidget(b_pickWed, 1, 2, 1, 1);
 
-        pushButton_7 = new QPushButton(Add_task);
-        pushButton_7->setObjectName("pushButton_7");
-        pushButton_7->setMinimumSize(QSize(0, 29));
+        b_pickThu = new QPushButton(Add_task);
+        b_pickThu->setObjectName("b_pickThu");
+        b_pickThu->setMinimumSize(QSize(0, 29));
 
-        gridLayout_2->addWidget(pushButton_7, 1, 3, 1, 1);
+        gridLayout_2->addWidget(b_pickThu, 1, 3, 1, 1);
 
-        pushButton_4 = new QPushButton(Add_task);
-        pushButton_4->setObjectName("pushButton_4");
-        pushButton_4->setMinimumSize(QSize(0, 29));
+        b_pickFri = new QPushButton(Add_task);
+        b_pickFri->setObjectName("b_pickFri");
+        b_pickFri->setMinimumSize(QSize(0, 29));
 
-        gridLayout_2->addWidget(pushButton_4, 2, 0, 1, 1);
+        gridLayout_2->addWidget(b_pickFri, 2, 0, 1, 1);
 
-        pushButton_5 = new QPushButton(Add_task);
-        pushButton_5->setObjectName("pushButton_5");
-        pushButton_5->setMinimumSize(QSize(0, 29));
+        b_pickSat = new QPushButton(Add_task);
+        b_pickSat->setObjectName("b_pickSat");
+        b_pickSat->setMinimumSize(QSize(0, 29));
 
-        gridLayout_2->addWidget(pushButton_5, 2, 1, 1, 1);
+        gridLayout_2->addWidget(b_pickSat, 2, 1, 1, 1);
 
-        pushButton_6 = new QPushButton(Add_task);
-        pushButton_6->setObjectName("pushButton_6");
-        pushButton_6->setMinimumSize(QSize(0, 29));
+        b_pickSun = new QPushButton(Add_task);
+        b_pickSun->setObjectName("b_pickSun");
+        b_pickSun->setMinimumSize(QSize(0, 29));
 
-        gridLayout_2->addWidget(pushButton_6, 2, 2, 1, 1);
+        gridLayout_2->addWidget(b_pickSun, 2, 2, 1, 1);
 
-        pushButton_8 = new QPushButton(Add_task);
-        pushButton_8->setObjectName("pushButton_8");
-        pushButton_8->setMinimumSize(QSize(0, 29));
+        b_ready = new QPushButton(Add_task);
+        b_ready->setObjectName("b_ready");
+        b_ready->setMinimumSize(QSize(0, 29));
 
-        gridLayout_2->addWidget(pushButton_8, 2, 3, 1, 1);
+        gridLayout_2->addWidget(b_ready, 2, 3, 1, 1);
 
 
         retranslateUi(Add_task);
@@ -108,15 +108,15 @@ public:
     void retranslateUi(QDialog *Add_task)
     {
         Add_task->setWindowTitle(QCoreApplication::translate("Add_task", "Dialog", nullptr));
-        label->setText(QCoreApplication::translate("Add_task", "\320\242\320\262\320\276\321\217 \320\267\320\260\320\264\320\260\321\207\320\260", nullptr));
-        pushButton->setText(QCoreApplication::translate("Add_task", "\320\237\320\275", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("Add_task", "\320\222\321\202", nullptr));
-        pushButton_3->setText(QCoreApplication::translate("Add_task", "\320\241\321\200", nullptr));
-        pushButton_7->setText(QCoreApplication::translate("Add_task", "\320\247\321\202", nullptr));
-        pushButton_4->setText(QCoreApplication::translate("Add_task", "\320\237\321\202", nullptr));
-        pushButton_5->setText(QCoreApplication::translate("Add_task", "\320\241\320\261", nullptr));
-        pushButton_6->setText(QCoreApplication::translate("Add_task", "\320\235\320\264", nullptr));
-        pushButton_8->setText(QCoreApplication::translate("Add_task", "\320\223\320\276\321\202\320\276\320\262\320\276", nullptr));
+        lb_yourtask->setText(QCoreApplication::translate("Add_task", "\320\242\320\262\320\276\321\217 \320\267\320\260\320\264\320\260\321\207\320\260", nullptr));
+        b_pickMon->setText(QCoreApplication::translate("Add_task", "\320\237\320\275", nullptr));
+        b_pickTue->setText(QCoreApplication::translate("Add_task", "\320\222\321\202", nullptr));
+        b_pickWed->setText(QCoreApplication::translate("Add_task", "\320\241\321\200", nullptr));
+        b_pickThu->setText(QCoreApplication::translate("Add_task", "\320\247\321\202", nullptr));
+        b_pickFri->setText(QCoreApplication::translate("Add_task", "\320\237\321\202", nullptr));
+        b_pickSat->setText(QCoreApplication::translate("Add_task", "\320\241\320\261", nullptr));
+        b_pickSun->setText(QCoreApplication::translate("Add_task", "\320\235\320\264", nullptr));
+        b_ready->setText(QCoreApplication::translate("Add_task", "\320\223\320\276\321\202\320\276\320\262\320\276", nullptr));
     } // retranslateUi
 
 };
