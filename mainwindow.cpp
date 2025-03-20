@@ -1,5 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "add_task.h"
+
+void MainWindow::slot(QString task)
+{
+    ui->txt_tasks->append("<p style='color: #4c3535; align=”left”'><b>• " + task + "</b></p>");
+}
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -25,9 +31,14 @@ MainWindow::~MainWindow()
 void MainWindow::on_add_button_clicked()
 {
     //QMessageBox::about(this, "Calendar", "week");
-    Add_task window;
+    /*Add_task window;
     window.setModal(true);
-    window.exec();
+    window.exec();*/
+    add_task = new Add_task;
+    add_task->show();
+
+    connect(add_task, &Add_task::signal, this, &MainWindow::slot);
+
 }
 
 

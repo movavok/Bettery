@@ -94,7 +94,7 @@ public:
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:700; color:#4c3535;\">\320\241\320\265\320\263\320\276\320\264\320\275\321\217\321\210\320\275\320\270\320\265 \320\267\320\260\320\264\320\260\321\207\320\270:</span></p></body></html>", nullptr));
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt; font-weight:700; color:#4c3535;\">\320\241\320\265\320\263\320\276\320\264\320\275\321\217\321\210\320\275\320\270\320\265 \320\267\320\260\320\264\320\260\321\207\320\270:</span></p></body></html>", nullptr));
         b_toleft->setText(QCoreApplication::translate("MainWindow", "<", nullptr));
         b_toright->setText(QCoreApplication::translate("MainWindow", ">", nullptr));
     } // retranslateUi

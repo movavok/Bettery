@@ -22,6 +22,9 @@ private slots:
 
 private:
     Ui::Add_task *ui;
+
+signals:
+    void signal(QString task);
 };
 
 #endif // ADD_TASK_H

@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QTime>
 #include <QTimer>
+#include <QTextBrowser>
 #include <QDebug>
 
 #include "add_task.h"
@@ -19,6 +20,9 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+public slots:
+    void slot(QString task);
+
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -30,6 +34,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
+    Add_task *add_task;
+
+    QTextBrowser *textBrowser; // Текст с заданиями
     QTimer *timer; // таймер
 };
 #endif // MAINWINDOW_H
