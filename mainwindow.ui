@@ -115,6 +115,19 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <string>&gt;</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="b_info">
+    <property name="geometry">
+     <rect>
+      <x>507</x>
+      <y>272</y>
+      <width>20</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>?</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

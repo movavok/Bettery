@@ -38,5 +38,9 @@ private:
 
     QTextBrowser *textBrowser; // Текст с заданиями
     QTimer *timer; // таймер
+
+protected:
+    //void enterEvent(QEnterEvent *event) override;
 };
+
 #endif // MAINWINDOW_H

@@ -4,7 +4,7 @@
 
 void MainWindow::slot(QString task)
 {
-    ui->txt_tasks->append("<p style='color: #4c3535; align=”left”'><b>• " + task + "</b></p>");
+    ui->txt_tasks->append("<p style='color: #4c3535; font-size: 12pt; font-weight: bold; text-align: left; margin-left: 10px;'>" " • " + task + "</p>");
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer, &QTimer::timeout, this, &MainWindow::day_progress);
     timer->start(60000);
 
-    day_progress();
+    day_progress();    
 }
 
 MainWindow::~MainWindow()
@@ -31,14 +31,10 @@ MainWindow::~MainWindow()
 void MainWindow::on_add_button_clicked()
 {
     //QMessageBox::about(this, "Calendar", "week");
-    /*Add_task window;
-    window.setModal(true);
-    window.exec();*/
-    add_task = new Add_task;
-    add_task->show();
-
-    connect(add_task, &Add_task::signal, this, &MainWindow::slot);
-
+    Add_task add_task;
+    add_task.setModal(true);
+    connect(&add_task, &Add_task::signal, this, &MainWindow::slot);
+    add_task.exec();
 }
 
 
@@ -50,4 +46,16 @@ void MainWindow::day_progress()
     ui->day_progress->setValue(min_conver);
     qDebug() << min_conver;
 }
+
+/*void MainWindow::enterEvent(QEnterEvent *event)
+{
+
+    if (ui->b_info->underMouse()) {
+        qDebug() << "Mouse entered the button!";
+    }
+    else{
+        qDebug() << "Mouse left the button!";
+    }
+}*/
+
 

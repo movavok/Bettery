@@ -34,6 +34,7 @@ public:
     QProgressBar *day_progress;
     QPushButton *b_toleft;
     QPushButton *b_toright;
+    QPushButton *b_info;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -68,6 +69,9 @@ public:
         b_toright = new QPushButton(centralwidget);
         b_toright->setObjectName("b_toright");
         b_toright->setGeometry(QRect(540, 180, 41, 29));
+        b_info = new QPushButton(centralwidget);
+        b_info->setObjectName("b_info");
+        b_info->setGeometry(QRect(507, 272, 20, 20));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -97,6 +101,7 @@ public:
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt; font-weight:700; color:#4c3535;\">\320\241\320\265\320\263\320\276\320\264\320\275\321\217\321\210\320\275\320\270\320\265 \320\267\320\260\320\264\320\260\321\207\320\270:</span></p></body></html>", nullptr));
         b_toleft->setText(QCoreApplication::translate("MainWindow", "<", nullptr));
         b_toright->setText(QCoreApplication::translate("MainWindow", ">", nullptr));
+        b_info->setText(QCoreApplication::translate("MainWindow", "?", nullptr));
     } // retranslateUi
 
 };
