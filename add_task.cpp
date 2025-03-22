@@ -13,11 +13,11 @@ Add_task::Add_task(QWidget *parent)
     ui->setupUi(this);
 }
 
-
 Add_task::~Add_task()
 {
     delete ui;
 }
+
 void Add_task::on_b_ready_clicked()
 {
     if(pressed){

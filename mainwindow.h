@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QTime>
 #include <QTimer>
+#include <QMap>
 #include <QTextBrowser>
 #include <QDebug>
 
@@ -30,14 +31,22 @@ public:
 private slots:
     void on_add_button_clicked();
     void day_progress();
+    void on_txt_tasks_anchorClicked(const QUrl &arg1);
 
 private:
     Ui::MainWindow *ui;
 
+    int taskId = 0;
+    QUrl arg1;
+    QString taskHtml;
+    QMap<QUrl, bool> crossed_tasks;
+    QString old_txt;
+
     Add_task *add_task;
 
-    QTextBrowser *textBrowser; // Текст с заданиями
     QTimer *timer; // таймер
+
+    QTimer *debounceTimer = nullptr; // контра повторного вызова ссылки
 
 protected:
     //void enterEvent(QEnterEvent *event) override;

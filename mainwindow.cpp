@@ -4,7 +4,13 @@
 
 void MainWindow::slot(QString task)
 {
-    ui->txt_tasks->append("<p style='color: #4c3535; font-size: 12pt; font-weight: bold; text-align: left; margin-left: 10px;'>" " • " + task + "</p>");
+    QString taskHtml = QString("<a href=\"#task%1\"><span style=\" font-size:12pt; font-weight:700; text-decoration: none; color:#4c3535;\">• %2</span></a>").arg(taskId).arg(task);
+
+    crossed_tasks[arg1] = false;
+
+    ui->txt_tasks->append(taskHtml);
+    old_txt = ui->txt_tasks->toHtml();
+    taskId++;
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -12,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->txt_tasks->setOpenLinks(false);
 
     ui->day_progress->setMinimum(0);    // 00:00
     ui->day_progress->setMaximum(1439); // 23:59
@@ -20,7 +27,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer, &QTimer::timeout, this, &MainWindow::day_progress);
     timer->start(60000);
 
-    day_progress();    
+    day_progress();
+    connect(ui->txt_tasks, &QTextBrowser::anchorClicked, this, &MainWindow::on_txt_tasks_anchorClicked);
 }
 
 MainWindow::~MainWindow()
@@ -58,4 +66,54 @@ void MainWindow::day_progress()
     }
 }*/
 
+void MainWindow::on_txt_tasks_anchorClicked(const QUrl &arg1)
+{
+    //ui->txt_tasks->setSource(QUrl());
+    if (debounceTimer && debounceTimer->isActive())
+        return;
+    if (!debounceTimer) {
+        debounceTimer = new QTimer(this);
+        debounceTimer->setSingleShot(true);
+    }
+    debounceTimer->start(1);
+
+    ui->txt_tasks->setSource(QUrl());
+    qDebug() << "Нажата строка:" << arg1;
+
+    QString taskUrl = arg1.toString();
+    QString cur_txt = ui->txt_tasks->toHtml();
+
+    if (!crossed_tasks[arg1]) {
+        crossed_tasks[arg1] = true;
+        qDebug() << "Зачеркнуто";
+        QString startff = QString("<a href=\"%1\"").arg(taskUrl); // зачеркивание
+        int startff_index = cur_txt.indexOf(startff);
+        if (startff_index != -1) {
+            int ffend_index = cur_txt.indexOf("</a>", startff_index);
+            if (ffend_index != -1) {
+                QString old_task = cur_txt.mid(startff_index, ffend_index - startff_index + 4);
+                cur_txt.remove(startff_index, ffend_index - startff_index + 4); // 4 = </a> :)
+                cur_txt.insert(startff_index, QString("<span style='text-decoration: underline line-through;'>%1</span>").arg(old_task));
+                ui->txt_tasks->setHtml(cur_txt);
+                //qDebug() << cur_txt;
+            }
+        }
+    } else {
+        crossed_tasks[arg1] = false;
+        qDebug() << "Задача снова активна";
+        //qDebug() << cur_txt;
+        QString startff = QString("<a href=\"%1\"").arg(taskUrl); // зачеркивание
+        int startff_index = cur_txt.indexOf(startff);
+        if (startff_index != -1) {
+            int ffend_index = cur_txt.indexOf("</a>", startff_index);
+            if (ffend_index != -1) {
+                QString old_task = cur_txt.mid(startff_index, ffend_index - startff_index + 4);
+                old_task.replace("line-through", "none");
+                cur_txt.remove(startff_index, ffend_index - startff_index);
+                cur_txt.insert(startff_index, QString("%1").arg(old_task));
+                ui->txt_tasks->setHtml(cur_txt);
+            }
+        }
+    }
+}
 

@@ -59,6 +59,7 @@ public:
         txt_tasks = new QTextBrowser(frame);
         txt_tasks->setObjectName("txt_tasks");
         txt_tasks->setGeometry(QRect(0, 0, 381, 192));
+        txt_tasks->setOpenLinks(true);
         day_progress = new QProgressBar(gbox_monday);
         day_progress->setObjectName("day_progress");
         day_progress->setGeometry(QRect(0, 231, 443, 16));
