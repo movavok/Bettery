@@ -20,15 +20,22 @@ Add_task::~Add_task()
 
 void Add_task::on_b_ready_clicked()
 {
-    if(pressed){
+    if (pressed && ui->le_task->text().remove(" ").length() > 0){
+        if (ui->le_task->text() == "<Запишите задачу>"){
+            return;
+        }
         QString added_task = ui->le_task->text();
         qDebug() << added_task;
         emit signal(added_task);
 
         hide();
     }
-    else{
+    if (ui->le_task->text().remove(" ").length() == 0){
+        ui->le_task->setText("<Запишите задачу>");
+    }
+    if (!pressed){
         QString added_task = ui->le_task->text();
+        added_task.replace(" <Выбери день(и) недели>", "");
         ui->le_task->setText(added_task + " <Выбери день(и) недели>");
     }
 }
