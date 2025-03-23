@@ -4,7 +4,7 @@
 
 void MainWindow::slot(QString task)
 {
-    QString taskHtml = QString("<a href=\"#task%1\"><span style=\" font-size:12pt; font-weight:700; text-decoration: none; color:#4c3535;\">• %2</span></a>").arg(taskId).arg(task);
+    QString taskHtml = QString("<a href=\"#task%1\"><span style=\" font-size:12pt; font-weight:700; text-decoration: underline; color:#4c3535;\">• %2</span></a>").arg(taskId).arg(task);
 
     crossed_tasks[arg1] = false;
 
@@ -93,7 +93,11 @@ void MainWindow::on_txt_tasks_anchorClicked(const QUrl &arg1)
             if (ffend_index != -1) {
                 QString old_task = cur_txt.mid(startff_index, ffend_index - startff_index + 4);
                 cur_txt.remove(startff_index, ffend_index - startff_index + 4); // 4 = </a> :)
-                cur_txt.insert(startff_index, QString("<span style='text-decoration: underline line-through;'>%1</span>").arg(old_task));
+                cur_txt.insert(startff_index, QString("<span style='text-decoration: underline line-through; color:#b89f9f;'>%1</span>").arg(old_task));
+                cur_txt.replace(
+                    QString("<a href=\"%1\"><span style=\" font-size:12pt; font-weight:700; text-decoration: underline; color:#4c3535;\">").arg(taskUrl),
+                    QString("<a href=\"%1\"><span style=\" font-size:12pt; font-weight:700; text-decoration: underline; color:#b89f9f;\">").arg(taskUrl)
+                    );
                 ui->txt_tasks->setHtml(cur_txt);
                 //qDebug() << cur_txt;
             }
@@ -101,17 +105,21 @@ void MainWindow::on_txt_tasks_anchorClicked(const QUrl &arg1)
     } else {
         crossed_tasks[arg1] = false;
         qDebug() << "Задача снова активна";
-        //qDebug() << cur_txt;
         QString startff = QString("<a href=\"%1\"").arg(taskUrl); // зачеркивание
         int startff_index = cur_txt.indexOf(startff);
         if (startff_index != -1) {
             int ffend_index = cur_txt.indexOf("</a>", startff_index);
             if (ffend_index != -1) {
                 QString old_task = cur_txt.mid(startff_index, ffend_index - startff_index + 4);
-                old_task.replace("line-through", "none");
-                cur_txt.remove(startff_index, ffend_index - startff_index);
-                cur_txt.insert(startff_index, QString("%1").arg(old_task));
+                old_task = old_task.replace("line-through;", "");
+                cur_txt.remove(startff_index, ffend_index - startff_index + 4);
+                cur_txt.insert(startff_index, old_task);
+                cur_txt.replace(
+                    QString("<a href=\"%1\"><span style=\" font-size:12pt; font-weight:700; text-decoration: underline  color:#b89f9f;\">").arg(taskUrl),
+                    QString("<a href=\"%1\"><span style=\" font-size:12pt; font-weight:700; text-decoration: underline; color:#4c3535;\">").arg(taskUrl)
+                    );
                 ui->txt_tasks->setHtml(cur_txt);
+                //qDebug() << cur_txt;
             }
         }
     }
