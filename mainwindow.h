@@ -8,6 +8,7 @@
 #include <QMap>
 #include <QTextBrowser>
 #include <QDebug>
+#include <QToolTip>
 
 #include "add_task.h"
 
@@ -28,10 +29,14 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    bool eventFilter(QObject *obj, QEvent *event) override; // Наведение на кнопку с информацией
+
 private slots:
     void on_add_button_clicked();
     void day_progress();
     void on_txt_tasks_anchorClicked(const QUrl &arg1);
+
+    void on_b_info_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -46,10 +51,7 @@ private:
 
     QTimer *timer; // таймер
 
-    QTimer *debounceTimer = nullptr; // контра повторного вызова ссылки
-
-protected:
-    //void enterEvent(QEnterEvent *event) override;
+    QTimer *debounceTimer = nullptr; // контра повторного вызова ссылки  
 };
 
 #endif // MAINWINDOW_H

@@ -2,9 +2,12 @@
 #include "ui_mainwindow.h"
 #include "add_task.h"
 
+bool info_closed = false;
+
 void MainWindow::slot(QString task)
 {
-    QString taskHtml = QString("<a href=\"#task%1\"><span style=\" font-size:12pt; font-weight:700; text-decoration: underline; color:#4c3535;\">• %2</span></a>").arg(taskId).arg(task);
+    QString taskHtml = QString("<a href=\"#task%1\"><span style=\" font-size:12pt; font-weight:700;"
+                               " text-decoration: underline; color:#4c3535;\">• %2</span></a>").arg(taskId).arg(task);
 
     crossed_tasks[arg1] = false;
 
@@ -19,9 +22,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->txt_tasks->setOpenLinks(false);
+    ui->b_info->installEventFilter(this);
 
-    ui->day_progress->setMinimum(0);    // 00:00
-    ui->day_progress->setMaximum(1439); // 23:59
+    ui->day_progress->setMinimum(540);    // 09:00
+    ui->day_progress->setMaximum(1380); // 23:00
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::day_progress);
@@ -38,7 +42,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_add_button_clicked()
 {
-    //QMessageBox::about(this, "Calendar", "week");
     Add_task add_task;
     add_task.setModal(true);
     connect(&add_task, &Add_task::signal, this, &MainWindow::slot);
@@ -55,20 +58,8 @@ void MainWindow::day_progress()
     qDebug() << min_conver;
 }
 
-/*void MainWindow::enterEvent(QEnterEvent *event)
+void MainWindow::on_txt_tasks_anchorClicked(const QUrl &arg1) // страшные зачеркивания и расчеркивания
 {
-
-    if (ui->b_info->underMouse()) {
-        qDebug() << "Mouse entered the button!";
-    }
-    else{
-        qDebug() << "Mouse left the button!";
-    }
-}*/
-
-void MainWindow::on_txt_tasks_anchorClicked(const QUrl &arg1)
-{
-    //ui->txt_tasks->setSource(QUrl());
     if (debounceTimer && debounceTimer->isActive())
         return;
     if (!debounceTimer) {
@@ -93,13 +84,15 @@ void MainWindow::on_txt_tasks_anchorClicked(const QUrl &arg1)
             if (ffend_index != -1) {
                 QString old_task = cur_txt.mid(startff_index, ffend_index - startff_index + 4);
                 cur_txt.remove(startff_index, ffend_index - startff_index + 4); // 4 = </a> :)
-                cur_txt.insert(startff_index, QString("<span style='text-decoration: underline line-through; color:#b89f9f;'>%1</span>").arg(old_task));
+                cur_txt.insert(startff_index, QString("<span style='text-decoration: underline line-through;"
+                                                      " color:#b89f9f;'>%1</span>").arg(old_task));
                 cur_txt.replace(
-                    QString("<a href=\"%1\"><span style=\" font-size:12pt; font-weight:700; text-decoration: underline; color:#4c3535;\">").arg(taskUrl),
-                    QString("<a href=\"%1\"><span style=\" font-size:12pt; font-weight:700; text-decoration: underline; color:#b89f9f;\">").arg(taskUrl)
+                    QString("<a href=\"%1\"><span style=\" font-size:12pt; font-weight:700;"
+                            " text-decoration: underline; color:#4c3535;\">").arg(taskUrl),
+                    QString("<a href=\"%1\"><span style=\" font-size:12pt; font-weight:700;"
+                            " text-decoration: underline; color:#b89f9f;\">").arg(taskUrl)
                     );
                 ui->txt_tasks->setHtml(cur_txt);
-                //qDebug() << cur_txt;
             }
         }
     } else {
@@ -115,13 +108,38 @@ void MainWindow::on_txt_tasks_anchorClicked(const QUrl &arg1)
                 cur_txt.remove(startff_index, ffend_index - startff_index + 4);
                 cur_txt.insert(startff_index, old_task);
                 cur_txt.replace(
-                    QString("<a href=\"%1\"><span style=\" font-size:12pt; font-weight:700; text-decoration: underline  color:#b89f9f;\">").arg(taskUrl),
-                    QString("<a href=\"%1\"><span style=\" font-size:12pt; font-weight:700; text-decoration: underline; color:#4c3535;\">").arg(taskUrl)
+                    QString("<a href=\"%1\"><span style=\" font-size:12pt; font-weight:700;"
+                            " text-decoration: underline  color:#b89f9f;\">").arg(taskUrl),
+                    QString("<a href=\"%1\"><span style=\" font-size:12pt; font-weight:700;"
+                            " text-decoration: underline; color:#4c3535;\">").arg(taskUrl)
                     );
                 ui->txt_tasks->setHtml(cur_txt);
-                //qDebug() << cur_txt;
             }
         }
+    }
+}
+
+bool MainWindow::eventFilter(QObject *obj, QEvent *event) // Наведение на кнопку с информацией
+{
+    if (obj == ui->b_info && info_closed == false) {
+        if (event->type() == QEvent::Enter)
+            QToolTip::showText(QCursor::pos(), "<b><span style=\" "
+                                               "color:#4c3535;\">"
+                                               "Слева ты можешь наблюдать\nполосу, что отображает\nдлительность дня\n"
+                                               "<a href=\"#time\">с 9 до 23 часов.</a>"
+                                               "</span></b>"); // отображение информации об прогрессбаре
+    }
+    return QMainWindow::eventFilter(obj, event);
+}
+
+void MainWindow::on_b_info_clicked()
+{
+    info_closed = !info_closed;
+    if (info_closed == true){
+        ui->b_info->setText("><");
+    }
+    else{
+        ui->b_info->setText("?");
     }
 }
 
