@@ -128,7 +128,20 @@ li.checked::marker { content: &quot;\2612&quot;; }
      </rect>
     </property>
     <property name="text">
-     <string>?</string>
+     <string>&gt;&lt;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="b_time_set">
+    <property name="geometry">
+     <rect>
+      <x>507</x>
+      <y>244</y>
+      <width>20</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>*</string>
     </property>
    </widget>
   </widget>

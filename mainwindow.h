@@ -38,6 +38,8 @@ private slots:
 
     void on_b_info_clicked();
 
+    void on_b_time_set_clicked();
+
 private:
     Ui::MainWindow *ui;
 

@@ -1,8 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "add_task.h"
+#include "time_set_win.h"
 
-bool info_closed = false;
+bool info_closed = true;
 
 void MainWindow::slot(QString task)
 {
@@ -21,11 +22,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->b_time_set->hide();
     ui->txt_tasks->setOpenLinks(false);
     ui->b_info->installEventFilter(this);
 
     ui->day_progress->setMinimum(540);    // 09:00
-    ui->day_progress->setMaximum(1380); // 23:00
+    ui->day_progress->setMaximum(1380);   // 23:00
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::day_progress);
@@ -40,7 +42,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_add_button_clicked()
+void MainWindow::on_add_button_clicked() // Открытие окна для добавления задачи
 {
     Add_task add_task;
     add_task.setModal(true);
@@ -48,8 +50,14 @@ void MainWindow::on_add_button_clicked()
     add_task.exec();
 }
 
+void MainWindow::on_b_time_set_clicked() // Открытие окна с настройкой времени для ПрогрессБара
+{
+    time_set_win ts_win;
+    ts_win.setModal(true);
+    ts_win.exec();
+}
 
-void MainWindow::day_progress()
+void MainWindow::day_progress() // ПрогрессБар длины дня
 {
     QTime now = QTime::currentTime();
 
@@ -126,20 +134,25 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event) // Наведение 
             QToolTip::showText(QCursor::pos(), "<b><span style=\" "
                                                "color:#4c3535;\">"
                                                "Слева ты можешь наблюдать\nполосу, что отображает\nдлительность дня\n"
-                                               "<a href=\"#time\">с 9 до 23 часов.</a>"
+                                               "с <a href=\"#first_hour\">9</a> до <a href=\"#second_hour\">23</a> часов."
                                                "</span></b>"); // отображение информации об прогрессбаре
+        else if (event->type() == QEvent::Leave){
+        }
+
     }
     return QMainWindow::eventFilter(obj, event);
 }
 
-void MainWindow::on_b_info_clicked()
+void MainWindow::on_b_info_clicked() // Блокировка кнопки с информацией
 {
     info_closed = !info_closed;
     if (info_closed == true){
         ui->b_info->setText("><");
+        ui->b_time_set->hide();
     }
     else{
         ui->b_info->setText("?");
+        ui->b_time_set->show();
     }
 }
 
