@@ -11,6 +11,7 @@
 #include <QToolTip>
 
 #include "add_task.h"
+#include "time_set_win.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -24,6 +25,8 @@ class MainWindow : public QMainWindow
 
 public slots:
     void slot(QString task);
+    void get_time(int firsttime, int secondtime);
+
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -48,6 +51,9 @@ private:
     QString taskHtml;
     QMap<QUrl, bool> crossed_tasks;
     QString old_txt;
+
+    int firsttime;
+    int secondtime;
 
     Add_task *add_task;
 

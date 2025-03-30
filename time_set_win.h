@@ -20,6 +20,9 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+signals:
+    void give_time(int firsttime, int secondtime);
+
 private:
     Ui::time_set_win *ui;
 };

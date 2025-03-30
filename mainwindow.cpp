@@ -17,6 +17,16 @@ void MainWindow::slot(QString task)
     taskId++;
 }
 
+void MainWindow::get_time(int firsttime, int secondtime){
+    this->firsttime = firsttime;
+    this->secondtime = secondtime;
+
+    ui->day_progress->setMinimum(firsttime * 60);
+    ui->day_progress->setMaximum(secondtime * 60);
+
+    qDebug() << "Updated firsttime:" << firsttime << "secondtime:" << secondtime;
+}
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -53,6 +63,7 @@ void MainWindow::on_add_button_clicked() // Открытие окна для д�
 void MainWindow::on_b_time_set_clicked() // Открытие окна с настройкой времени для ПрогрессБара
 {
     time_set_win ts_win;
+    connect(&ts_win, &time_set_win::give_time, this, &MainWindow::get_time);
     ts_win.setModal(true);
     ts_win.exec();
 }
@@ -130,12 +141,14 @@ void MainWindow::on_txt_tasks_anchorClicked(const QUrl &arg1) // страшны�
 bool MainWindow::eventFilter(QObject *obj, QEvent *event) // Наведение на кнопку с информацией
 {
     if (obj == ui->b_info && info_closed == false) {
-        if (event->type() == QEvent::Enter)
-            QToolTip::showText(QCursor::pos(), "<b><span style=\" "
-                                               "color:#4c3535;\">"
-                                               "Слева ты можешь наблюдать\nполосу, что отображает\nдлительность дня\n"
-                                               "с <a href=\"#first_hour\">9</a> до <a href=\"#second_hour\">23</a> часов."
-                                               "</span></b>"); // отображение информации об прогрессбаре
+        if (event->type() == QEvent::Enter){
+            QString tt_info = QString("<b><span style=\" "
+                                      "color:#4c3535;\">"
+                                      "Слева ты можешь наблюдать\nполосу, что отображает\nдлительность дня\n"
+                                      "с <a href=\"#first_hour\">%1</a> до <a href=\"#second_hour\">%2</a> часов."
+                                      "</span></b>").arg(firsttime).arg(secondtime);
+            QToolTip::showText(QCursor::pos(), tt_info); // отображение информации об прогрессбаре
+        }
         else if (event->type() == QEvent::Leave){
         }
 
