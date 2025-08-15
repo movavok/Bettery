@@ -45,6 +45,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     day_progress();
     connect(ui->txt_tasks, &QTextBrowser::anchorClicked, this, &MainWindow::on_txt_tasks_anchorClicked);
+
+    connect(ui->act_add_task, &QAction::triggered, this, &MainWindow::on_add_button_clicked);
+    connect(ui->act_del_task, &QAction::triggered, this, &MainWindow::createMenuLinks);
 }
 
 MainWindow::~MainWindow()
@@ -58,6 +61,13 @@ void MainWindow::on_add_button_clicked() // Открытие окна для д�
     add_task.setModal(true);
     connect(&add_task, &Add_task::signal, this, &MainWindow::slot);
     add_task.exec();
+}
+
+void MainWindow::createMenuLinks()
+{
+    while(true){
+
+    }
 }
 
 void MainWindow::on_b_time_set_clicked() // Открытие окна с настройкой времени для ПрогрессБара

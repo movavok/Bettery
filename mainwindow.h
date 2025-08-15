@@ -38,10 +38,9 @@ private slots:
     void on_add_button_clicked();
     void day_progress();
     void on_txt_tasks_anchorClicked(const QUrl &arg1);
-
     void on_b_info_clicked();
-
     void on_b_time_set_clicked();
+    void createMenuLinks();
 
 private:
     Ui::MainWindow *ui;

@@ -169,8 +169,26 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <height>26</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuTasks">
+    <property name="title">
+     <string>Tasks</string>
+    </property>
+    <widget class="QMenu" name="menuDelete_task">
+     <property name="title">
+      <string>Delete task</string>
+     </property>
+    </widget>
+    <addaction name="act_add_task"/>
+    <addaction name="menuDelete_task"/>
+   </widget>
+   <addaction name="menuTasks"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="act_add_task">
+   <property name="text">
+    <string>Add task</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
