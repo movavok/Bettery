@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "add_task.h"
 #include "time_set_win.h"
+#include "db_worker.h"
 
 bool info_closed = true;
 
@@ -31,6 +32,9 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    db_worker db;
+    db.createTable();
+
     ui->setupUi(this);
     ui->b_time_set->hide();
     ui->txt_tasks->setOpenLinks(false);
@@ -47,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->txt_tasks, &QTextBrowser::anchorClicked, this, &MainWindow::on_txt_tasks_anchorClicked);
 
     connect(ui->act_add_task, &QAction::triggered, this, &MainWindow::on_add_button_clicked);
-    connect(ui->act_del_task, &QAction::triggered, this, &MainWindow::createMenuLinks);
+    connect(ui->act_del_task, &QMenu::aboutToShow, this, &MainWindow::createMenuLinks);
 }
 
 MainWindow::~MainWindow()

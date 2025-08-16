@@ -173,13 +173,13 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="title">
      <string>Tasks</string>
     </property>
-    <widget class="QMenu" name="menuDelete_task">
+    <widget class="QMenu" name="act_del_task">
      <property name="title">
       <string>Delete task</string>
      </property>
     </widget>
     <addaction name="act_add_task"/>
-    <addaction name="menuDelete_task"/>
+    <addaction name="act_del_task"/>
    </widget>
    <addaction name="menuTasks"/>
   </widget>
