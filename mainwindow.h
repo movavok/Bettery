@@ -12,6 +12,8 @@
 
 #include "add_task.h"
 #include "time_set_win.h"
+#include "ui_mainwindow.h"
+#include "db_worker.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -54,6 +56,7 @@ private:
     int firsttime;
     int secondtime;
 
+    db_worker *db;
     Add_task *add_task;
 
     QTimer *timer; // таймер

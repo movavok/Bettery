@@ -2,6 +2,9 @@
 #define ADD_TASK_H
 
 #include <QDialog>
+#include <QDebug>
+#include <QTextBrowser>
+#include "ui_add_task.h"
 
 namespace Ui {
 class Add_task;

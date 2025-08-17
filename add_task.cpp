@@ -1,8 +1,4 @@
-#include <QDebug>
-#include <QTextBrowser>
 #include "add_task.h"
-#include "mainwindow.h"
-#include "ui_add_task.h"
 
 bool pressed = false;
 

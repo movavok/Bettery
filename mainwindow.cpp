@@ -1,8 +1,4 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "add_task.h"
-#include "time_set_win.h"
-#include "db_worker.h"
 
 bool info_closed = true;
 
@@ -11,7 +7,9 @@ void MainWindow::slot(QString task)
     QString taskHtml = QString("<a href=\"#task%1\"><span style=\" font-size:12pt; font-weight:700;"
                                " text-decoration: underline; color:#4c3535;\">• %2</span></a>").arg(taskId).arg(task);
 
-    crossed_tasks[arg1] = false;
+    //crossed_tasks[arg1] = false;
+
+    db->addTask(task, "MN", false);
 
     ui->txt_tasks->append(taskHtml);
     old_txt = ui->txt_tasks->toHtml();
@@ -32,8 +30,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    db_worker db;
-    db.createTable();
+    db = new db_worker(this);
+    db->createTable();
 
     ui->setupUi(this);
     ui->b_time_set->hide();

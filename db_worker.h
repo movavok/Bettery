@@ -23,7 +23,7 @@ public:
     explicit db_worker(QObject *parent = nullptr);
     ~db_worker();
     bool createTable();
-    void addTask(const QString, const QString, bool);
+    void addTask(const QString&, const QString&, bool);
 private:
     QSqlDatabase db;
 };

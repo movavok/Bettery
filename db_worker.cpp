@@ -2,7 +2,7 @@
 
 db_worker::db_worker(QObject *parent) : QObject(parent)
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("tasks.db");
     if (!db.open()) {
         qDebug() << "База не открылась:" << db.lastError().text();
@@ -19,11 +19,11 @@ db_worker::~db_worker()
 
 bool db_worker::createTable()
 {
-    QSqlQuery query;
+    QSqlQuery query(db);
     QString createTable =
         "CREATE TABLE IF NOT EXISTS tasks ("
         "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-        "title TEXT NOT NULL, "
+        "name TEXT NOT NULL, "
         "day TEXT NOT NULL, "
         "done INTEGER NOT NULL DEFAULT 0"
         ")";
@@ -34,7 +34,7 @@ bool db_worker::createTable()
     return true;
 }
 
-void db_worker::addTask(const QString name, const QString day, bool done)
+void db_worker::addTask(const QString &name, const QString &day, bool done)
 {
     QSqlQuery query(db);
     query.prepare("INSERT INTO tasks (name, day, done) VALUES (?, ?, ?)");
